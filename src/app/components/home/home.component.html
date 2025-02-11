@@ -1,0 +1,32 @@
+<div *ngIf="excelData.length > 0">
+    <p>Nombre de lignes: {{ totalRows }}</p> <!-- Affiche le nombre de lignes -->
+  
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Date de mise à jour</th>
+          <th>Prix</th>
+          <th>Taux %</th>
+          <th>Catégorie</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of excelData">
+          <td>{{ row.name }}</td>
+          <td>{{ row.updated_at  }}</td> <!-- Formatage de la date -->
+          <td>
+            <span *ngFor="let price of row.prices; let i = index">
+              {{ formatPrice(price) }}
+              <span *ngIf="i < row.prices.length - 1">, </span> <!-- Séparateur entre les prix -->
+            </span>
+          </td>
+          <td>{{ row.rate }}</td>
+          <td>{{ row.category }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="sendData()">Envoyer les données</button>
+
+  
